@@ -24,6 +24,11 @@ override fun onCreate(savedInstanceState: Bundle?) {
         "native_video_view",
         NativeVideoViewFactory(flutterEngine!!.dartExecutor.binaryMessenger)
     )
+    flutterEngine!!.platformViewsController?.registry?.registerViewFactory(
+        "multi_video_view",
+        MultiVideoViewFactory(flutterEngine!!.dartExecutor.binaryMessenger)
+    )
+
 
      if (savedInstanceState != null) {
         nativeVideoView.restoreState()

@@ -44,12 +44,11 @@ class _VideoScreenState extends State<VideoScreen> {
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
-         SystemChrome.setPreferredOrientations([
-                                            DeviceOrientation.portraitUp,
-                                          ]);
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+        ]);
       },
       child: Scaffold(
-        
         appBar: AppBar(
           title: CustomText(
             name: widget.model.title,
@@ -60,12 +59,12 @@ class _VideoScreenState extends State<VideoScreen> {
         body: Column(
           children: [
             AspectRatio(
-                aspectRatio: 16 / 9,
-                child: widget.model.videoType == VideoType.YOU_TUBE
-                    ?
-                    // youtube video view without yt brandings
-      
-                    Stack(
+              aspectRatio: 16 / 9,
+              child: widget.model.videoType == VideoType.YOU_TUBE
+                  ?
+                  // youtube video view without yt brandings
+
+                  Stack(
                       children: [
                         ClipRRect(
                           borderRadius: orientation == Orientation.portrait
@@ -172,13 +171,26 @@ class _VideoScreenState extends State<VideoScreen> {
                           ),
                       ],
                     )
-      
-                    // vimeo plyer
-      
-                    :
-                    VimeoPlayer(videoId: widget.model.getVideoId())),
-                    
-                    // VimeoVideoPlayer(videoId: widget.model.getVideoId())),
+
+                  // vimeo plyer
+
+                  : 
+
+                  AndroidView(
+                                viewType: 'multi_video_view',
+                                creationParams: {
+                                  'url':
+                                      "https://player.vimeo.com/video/${widget.model.getVideoId()}",
+                                },
+                                creationParamsCodec:
+                                    const StandardMessageCodec(),
+                              ),
+                  // VimeoPlayer(
+                  //     videoId: widget.model.getVideoId(),
+                  //   ),
+            ),
+
+            // VimeoVideoPlayer(videoId: widget.model.getVideoId())),
             SizedBox(
               height: 20,
             ),
