@@ -104,8 +104,9 @@ class BannerVIew extends StatelessWidget {
           elevation: 4,
           itemExtent: 400,
           children: List.generate(homePro.bannerList.length, (index) {
-            return CustomImageWidget(
-                imagePath: homePro.bannerList[index] ?? "");
+            return Image.asset(homePro.bannerList[index],
+            fit: BoxFit.cover,
+            );
           }),
         ),
       );
